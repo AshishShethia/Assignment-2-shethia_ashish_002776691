@@ -26,37 +26,74 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        usernamelbl = new javax.swing.JLabel();
+        passwordlbl = new javax.swing.JLabel();
+        rolelbl = new javax.swing.JLabel();
+        usernameTxt = new javax.swing.JTextField();
+        roleTxt = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        passwordTxt = new javax.swing.JPasswordField();
+        Logintxt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setLayout(null);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 401, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 336, Short.MAX_VALUE)
-        );
+        usernamelbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usernamelbl.setText("Username");
+        jPanel1.add(usernamelbl);
+        usernamelbl.setBounds(31, 137, 69, 32);
+
+        passwordlbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        passwordlbl.setText("Password");
+        jPanel1.add(passwordlbl);
+        passwordlbl.setBounds(31, 187, 77, 27);
+
+        rolelbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rolelbl.setText("Role");
+        jPanel1.add(rolelbl);
+        rolelbl.setBounds(31, 233, 63, 20);
+        jPanel1.add(usernameTxt);
+        usernameTxt.setBounds(190, 140, 199, 22);
+
+        roleTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Doctor", "Patient", "System", "Admin" }));
+        jPanel1.add(roleTxt);
+        roleTxt.setBounds(189, 233, 199, 22);
+
+        jButton1.setText("Submit");
+        jPanel1.add(jButton1);
+        jButton1.setBounds(139, 305, 72, 23);
+
+        jButton2.setText("Close");
+        jPanel1.add(jButton2);
+        jButton2.setBounds(310, 305, 78, 23);
+        jPanel1.add(passwordTxt);
+        passwordTxt.setBounds(189, 187, 199, 22);
+
+        Logintxt.setBackground(new java.awt.Color(255, 0, 0));
+        Logintxt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Logintxt.setForeground(new java.awt.Color(255, 51, 51));
+        Logintxt.setText("Please Enter Login Details");
+        jPanel1.add(Logintxt);
+        Logintxt.setBounds(160, 20, 180, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(61, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -98,6 +135,15 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Logintxt;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField passwordTxt;
+    private javax.swing.JLabel passwordlbl;
+    private javax.swing.JComboBox<String> roleTxt;
+    private javax.swing.JLabel rolelbl;
+    private javax.swing.JTextField usernameTxt;
+    private javax.swing.JLabel usernamelbl;
     // End of variables declaration//GEN-END:variables
 }
