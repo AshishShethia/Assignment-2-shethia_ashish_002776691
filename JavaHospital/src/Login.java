@@ -1,3 +1,14 @@
+
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import hospitalsystem.JDBCConnection;
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -58,11 +69,16 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(usernameTxt);
         usernameTxt.setBounds(190, 140, 199, 22);
 
-        roleTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Doctor", "Patient", "System", "Admin" }));
+        roleTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Doctor", "Patient", "SystemAdmin", "CommunityAdmin", "HospitalAdmin" }));
         jPanel1.add(roleTxt);
         roleTxt.setBounds(189, 233, 199, 22);
 
         jButton1.setText("Submit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1);
         jButton1.setBounds(139, 305, 72, 23);
 
@@ -99,6 +115,52 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String role = roleTxt.getSelectedItem().toString();
+        String username = usernameTxt.getText();
+        String password = passwordTxt.getText();
+        
+        try{
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalsystem", "root", "root");
+            
+            System.out.println("connection open");
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery
+        ("SELECT * FROM hospitalsystem.login where role ='" + role + "' and username ='" + username + "' and password = '" + password + "'");
+            
+            if("Doctor".equals(role) && resultset.next()){
+                Doctor d = new Doctor();
+                setVisible(false);
+                d.show();
+            }else if("SystemAdmin".equals(role) && resultset.next()){
+                systemAdmin sa = new systemAdmin();
+                setVisible(false);
+                sa.show();
+            }else if("Patient".equals(role) && resultset.next()){
+                patientDetails p = new patientDetails();
+                setVisible(false);
+                p.show();
+            
+            }else if("HospitalAdmin".equals(role) && resultset.next()){
+                HospitalAdmin ha = new HospitalAdmin();
+                setVisible(false);
+                ha.show();
+
+            }else if("CommunityAdmin".equals(role) && resultset.next()){
+                communityAdmin ca = new communityAdmin();
+                setVisible(false);
+                ca.show();
+            }else{
+               JOptionPane.showMessageDialog(null,"Invalid Credentials!"); 
+            }
+            connection.close();
+            System.out.println("connection close");
+        }catch(SQLException e){
+     
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+    }
     /**
      * @param args the command line arguments
      */
