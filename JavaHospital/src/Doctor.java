@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
  * @author ashis
  */
 public class Doctor extends javax.swing.JFrame {
+    public int flag=0;
 
     /**
      * Creates new form Doctor
@@ -52,7 +53,7 @@ public class Doctor extends javax.swing.JFrame {
             System.out.println("connection open");
             java.sql.Statement statement = connection.createStatement();
            // statement.executeUpdate("insert into hospitalsystem.login" + "(role, username, password)" + "values ('"+role+"','"+username+"', '"+password+"')");
-            JOptionPane.showMessageDialog(null, "User successfully added!");
+            //JOptionPane.showMessageDialog(null, "User successfully added!");
             
             java.sql.PreparedStatement preparedStmt = connection.prepareStatement("SELECT * FROM hospitalsystem.patient");
             java.sql.ResultSet rs=preparedStmt.executeQuery();
@@ -155,6 +156,11 @@ public class Doctor extends javax.swing.JFrame {
 
         viewBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         viewBtn.setText("View");
+        viewBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewBtnActionPerformed(evt);
+            }
+        });
 
         addBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         addBtn.setText("ADD");
@@ -331,7 +337,7 @@ public class Doctor extends javax.swing.JFrame {
              connection.close();
         }
         catch(Exception e){
-             JOptionPane.showMessageDialog(null,"please add data in correct format!");
+             JOptionPane.showMessageDialog(null,"please add data !");
             
             
 
@@ -368,6 +374,28 @@ public class Doctor extends javax.swing.JFrame {
          setVisible(false);
         new Login().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
+        // TODO add your handling code here:
+        String hospital = hospTxt.getText();
+        
+        try{
+            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalsystem", "root", "root");
+            
+            System.out.println("connection open");
+            java.sql.Statement statement = connection.createStatement();
+          //  statement.executeUpdate("insert into hospitalsystem.login" + "(role, username, password)" + "values ('"+role+"','"+username+"', '"+password+"')");
+            JOptionPane.showMessageDialog(null, "User successfully added!");
+            java.sql.ResultSet rs=statement.executeQuery("SELECT * FROM hospitalsystem.patient");
+           // patientTable.setModel(DbUtils.resultSetToTableModel(rs));
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"please add data in correct format!");
+
+    
+    }                                         
+        
+    }//GEN-LAST:event_viewBtnActionPerformed
 
     /**
      * @param args the command line arguments

@@ -440,7 +440,7 @@ public class patientDetails extends javax.swing.JFrame {
             //java.sql.PreparedStatement preparedStmt = connection.prepareStatement("SELECT * FROM patient");
             
             System.out.println("connection table");
-            String sql = "select * from patient";
+            String sql = "select * from hospitalsystem.patient";
             ResultSet rs = statement.executeQuery(sql);
             //preparedStmt = connection.prepareStatement("SELECT * FROM hospitalsystem.patient;");
             //java.sql.ResultSet rs=preparedStmt.executeQuery();

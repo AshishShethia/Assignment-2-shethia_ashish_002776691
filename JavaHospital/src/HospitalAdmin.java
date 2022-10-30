@@ -164,7 +164,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
                     .addComponent(communityTxt)
                     .addComponent(cityTxt)
                     .addComponent(personTxt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
@@ -228,10 +228,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
 
         doctorTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Name", "Password", "Specialization"
@@ -259,6 +256,11 @@ public class HospitalAdmin extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("ADD");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(255, 51, 51));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -552,78 +554,47 @@ public class HospitalAdmin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String data[] = {nameTxt.getText(),passwordTxt.getText(),specializationTxt.getText()};
+        DefaultTableModel tb1Model = (DefaultTableModel)doctorTable.getModel();
+        tb1Model.addRow(data);
+        JOptionPane.showMessageDialog(null, "BC successfully added!");
+        nameTxt.setText("");
+        passwordTxt.setText("");
+        specializationTxt.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void Hospital_table(){
-        try{
+                    try{
             java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalsystem", "root", "root");
-            //stmt = con.createStatement();
+            
+            System.out.println("connection open");
             java.sql.Statement statement = connection.createStatement();
-            //java.sql.PreparedStatement preparedStmt = connection.prepareStatement("SELECT * FROM patient");
-            
-            System.out.println("connection table");
-            String sql = "select * from hospitalsystem.hospital";
-            ResultSet rs = statement.executeQuery(sql);
-            //preparedStmt = connection.prepareStatement("SELECT * FROM hospitalsystem.patient;");
-            //java.sql.ResultSet rs=preparedStmt.executeQuery();
-                        System.out.println("connection rs");
-
-          //  rs = preparedStmt.excecuteQuery();
-            
-           // java.sql.ResultSetMetaData Rsm = rs.getMetaData();
+            String sql = "SELECT * FROM hospitalsystem.hospital";
+           // statement.executeUpdate("insert into hospitalsystem.login" + "(role, username, password)" + "values ('"+role+"','"+username+"', '"+password+"')");
             JOptionPane.showMessageDialog(null, "User successfully added!");
-           // int c;
-           // c = Rsm.getColumnCount();
-            System.out.println("connection crsm");
-
-            //hopitalAdmin = new HospitalAdmin();
-            DefaultTableModel df = (DefaultTableModel)hospitalTable.getModel();
-            df.setRowCount(0);
-           // patient = new patientDetails();
-            
+            java.sql.ResultSet rs = statement.executeQuery(sql);
             while(rs.next()){
-                String Hospitalname = rs.getString("HospitalName");
+                String hospitalName = rs.getString("HospitalName");
                 String community = rs.getString("Community");
                 String city = rs.getString("City");
                 String person = rs.getString("Person");
                 String address = rs.getString("Address");
                 
-                            System.out.println("connection vecor");
-
-                System.out.println(Hospitalname+community+city+person+address);
-                for(model.HospitalAdmin vs : history.getHistory()){
-                                System.out.println("connection for");
-                        Object[] row = new Object[6];
-                         row[0] = vs.getHospitalname();
-                         row[1] = vs.getCommunity();
-                         row[2] = vs.getCity();
-                         row[3] = vs.getPerson();
-                         row[4] = vs.getAddress();
-                         df.addRow(row);
-
-//                        v2.add(rs.getString("Name"));
-//                        v2.add(rs.getString("Doctor"));
-//                        v2.add(rs.getString("Hospital"));
-//                        v2.add(rs.getString("Community"));
-//                        v2.add(rs.getString("City"));
-//                        v2.add(rs.getString("Date"));
-//                        v2.add(rs.getString("Time"));
-//                        v2.add(rs.getString("Gender"));
-//                        v2.add(rs.getString("RSF"));
-
-                    System.out.println("Success");
-                }
-                //System.out.print(v2);
-               // df.addRow(v2);
+                String tbData[] = {hospitalName,community,city,person,address};
+                DefaultTableModel tb1Model = (DefaultTableModel)hospitalTable.getModel();
                 
-               System.out.println("fail");
-
+                tb1Model.addRow(tbData);
+                 System.out.println("Ashish gg");
+                
             }
-            connection.close();
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Not Read!");
+            JOptionPane.showMessageDialog(null,"please add data in correct format!");
 
     
-    }                         
+    }           
     }
     
     /**
