@@ -71,6 +71,7 @@ public class patientDetails extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         RFVTxt = new javax.swing.JTextArea();
         bookBtn = new javax.swing.JButton();
+        signoutBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 255));
@@ -174,6 +175,15 @@ public class patientDetails extends javax.swing.JFrame {
             }
         });
 
+        signoutBtn.setBackground(new java.awt.Color(255, 0, 0));
+        signoutBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        signoutBtn.setText("SignOut");
+        signoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signoutBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -197,7 +207,9 @@ public class patientDetails extends javax.swing.JFrame {
                             .addComponent(cityTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(362, 362, 362))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(signoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(355, 355, 355)
                         .addComponent(bookBtn)
@@ -216,7 +228,7 @@ public class patientDetails extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1)))))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)))))
                 .addGap(63, 63, 63))
         );
 
@@ -226,7 +238,9 @@ public class patientDetails extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(signoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -270,7 +284,7 @@ public class patientDetails extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(38, 38, 38)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Book appointment", jPanel2);
@@ -412,6 +426,12 @@ public class patientDetails extends javax.swing.JFrame {
 //      
     }//GEN-LAST:event_bookBtnActionPerformed
 
+    private void signoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signoutBtnActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        new Login().setVisible(true);
+    }//GEN-LAST:event_signoutBtnActionPerformed
+
     public void patient_table(){
         try{
             java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalsystem", "root", "root");
@@ -540,6 +560,7 @@ public class patientDetails extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField nameTxt;
     private javax.swing.JTable patientTable;
+    private javax.swing.JButton signoutBtn;
     private javax.swing.JTextField timeTxt;
     // End of variables declaration//GEN-END:variables
 }

@@ -43,7 +43,6 @@ public class Login extends javax.swing.JFrame {
         usernameTxt = new javax.swing.JTextField();
         roleTxt = new javax.swing.JComboBox<>();
         submitBtn = new javax.swing.JButton();
-        closeBtn = new javax.swing.JButton();
         passwordTxt = new javax.swing.JPasswordField();
         Logintxt = new javax.swing.JLabel();
 
@@ -81,10 +80,6 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(submitBtn);
         submitBtn.setBounds(139, 305, 72, 23);
-
-        closeBtn.setText("Close");
-        jPanel1.add(closeBtn);
-        closeBtn.setBounds(310, 305, 78, 23);
         jPanel1.add(passwordTxt);
         passwordTxt.setBounds(189, 187, 199, 22);
 
@@ -198,7 +193,6 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logintxt;
-    private javax.swing.JButton closeBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField passwordTxt;
     private javax.swing.JLabel passwordlbl;
