@@ -42,8 +42,8 @@ public class Login extends javax.swing.JFrame {
         rolelbl = new javax.swing.JLabel();
         usernameTxt = new javax.swing.JTextField();
         roleTxt = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        submitBtn = new javax.swing.JButton();
+        closeBtn = new javax.swing.JButton();
         passwordTxt = new javax.swing.JPasswordField();
         Logintxt = new javax.swing.JLabel();
 
@@ -73,18 +73,18 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(roleTxt);
         roleTxt.setBounds(189, 233, 199, 22);
 
-        jButton1.setText("Submit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        submitBtn.setText("Submit");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                submitBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(139, 305, 72, 23);
+        jPanel1.add(submitBtn);
+        submitBtn.setBounds(139, 305, 72, 23);
 
-        jButton2.setText("Close");
-        jPanel1.add(jButton2);
-        jButton2.setBounds(310, 305, 78, 23);
+        closeBtn.setText("Close");
+        jPanel1.add(closeBtn);
+        closeBtn.setBounds(310, 305, 78, 23);
         jPanel1.add(passwordTxt);
         passwordTxt.setBounds(189, 187, 199, 22);
 
@@ -115,7 +115,7 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // TODO add your handling code here:
         String role = roleTxt.getSelectedItem().toString();
         String username = usernameTxt.getText();
@@ -159,7 +159,7 @@ public class Login extends javax.swing.JFrame {
         }catch(SQLException e){
      
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_submitBtnActionPerformed
     }
     /**
      * @param args the command line arguments
@@ -198,13 +198,13 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logintxt;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton closeBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField passwordTxt;
     private javax.swing.JLabel passwordlbl;
     private javax.swing.JComboBox<String> roleTxt;
     private javax.swing.JLabel rolelbl;
+    private javax.swing.JButton submitBtn;
     private javax.swing.JTextField usernameTxt;
     private javax.swing.JLabel usernamelbl;
     // End of variables declaration//GEN-END:variables
