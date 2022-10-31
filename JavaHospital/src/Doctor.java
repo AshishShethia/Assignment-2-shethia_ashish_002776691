@@ -1,6 +1,7 @@
 
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -19,63 +20,63 @@ public class Doctor extends javax.swing.JFrame {
      */
     public Doctor() {
         initComponents();
-        LoadPatient();
+       // LoadPatient();
     }
     
-    public class Patient
-    {
-        String name;
-        String RFV;
-        String hospital;
-        
-        public Patient(String name, String RFV, String hospital)
-        {
-            this.name = name;
-            this.RFV = RFV;
-            this.hospital = hospital;
-        }
-        
-        public String toString()
-        {
-            return name;
-           
-            
-        }
-        
-    }
+//    public class Patient
+//    {
+//        String name;
+//        String RFV;
+//        String hospital;
+//        
+//        public Patient(String name, String RFV, String hospital)
+//        {
+//            this.name = name;
+//            this.RFV = RFV;
+//            this.hospital = hospital;
+//        }
+//        
+//        public String toString()
+//        {
+//            return name;
+//           
+//            
+//        }
+//        
+//    }
     
     
-    public void LoadPatient()
-    {
-        try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalsystem", "root", "root");
-            
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-           // statement.executeUpdate("insert into hospitalsystem.login" + "(role, username, password)" + "values ('"+role+"','"+username+"', '"+password+"')");
-            //JOptionPane.showMessageDialog(null, "User successfully added!");
-            
-            java.sql.PreparedStatement preparedStmt = connection.prepareStatement("SELECT * FROM hospitalsystem.patient");
-            java.sql.ResultSet rs=preparedStmt.executeQuery();
-            pNameTxt.removeAll();
-          //pHospTxt.removeAll();
-           //RFVTxt.removeAll();
-            
-            while(rs.next())
-            {
-                pNameTxt.addItem(new Patient(rs.getString(1),rs.getString(2),rs.getString(3)));
-               //RFVTxt.addItem(new Patient(rs.getString(1),rs.getString(2),rs.getString(3)));
-              //pHospTxt.addItem(new Patient(rs.getString(1),rs.getString(2),rs.getString(3)));
-            }
-            
-            connection.close();
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null,"please add data in correct format!");
-
-    
-    }    
-    }
+//    public void LoadPatient()
+//    {
+//        try{
+//            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalsystem", "root", "root");
+//            
+//            System.out.println("connection open");
+//            java.sql.Statement statement = connection.createStatement();
+//           // statement.executeUpdate("insert into hospitalsystem.login" + "(role, username, password)" + "values ('"+role+"','"+username+"', '"+password+"')");
+//            //JOptionPane.showMessageDialog(null, "User successfully added!");
+//            
+//            java.sql.PreparedStatement preparedStmt = connection.prepareStatement("SELECT * FROM hospitalsystem.patient");
+//            java.sql.ResultSet rs=preparedStmt.executeQuery();
+//            pNameTxt.removeAll();
+//          //pHospTxt.removeAll();
+//           //RFVTxt.removeAll();
+//            
+//            while(rs.next())
+//            {
+//              //  pNameTxt.addItem(new Patient(rs.getString(1),rs.getString(2),rs.getString(3)));
+//               //RFVTxt.addItem(new Patient(rs.getString(1),rs.getString(2),rs.getString(3)));
+//              //pHospTxt.addItem(new Patient(rs.getString(1),rs.getString(2),rs.getString(3)));
+//            }
+//            
+//            connection.close();
+//        }
+//        catch(Exception e){
+//            JOptionPane.showMessageDialog(null,"please add data in correct format!");
+//
+//    
+//    }    
+  //  }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,7 +103,7 @@ public class Doctor extends javax.swing.JFrame {
         updateBtn = new javax.swing.JButton();
         viewBtn = new javax.swing.JButton();
         addBtn = new javax.swing.JButton();
-        pNameTxt = new javax.swing.JComboBox();
+        pNameTxt = new javax.swing.JTextField();
         hospTxt = new javax.swing.JTextField();
         RFVTxt = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -170,6 +171,15 @@ public class Doctor extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 0, 0));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setText("Signout");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PatientVariablePaneLayout = new javax.swing.GroupLayout(PatientVariablePane);
         PatientVariablePane.setLayout(PatientVariablePaneLayout);
         PatientVariablePaneLayout.setHorizontalGroup(
@@ -178,24 +188,31 @@ public class Doctor extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientVariablePaneLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(RFV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(PatientVariablePaneLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(RFV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(PatientVariablePaneLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(122, 122, 122)
                         .addGroup(PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(pulseRateTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                            .addComponent(pulseRateTxt)
                             .addComponent(oxyLvlTxt)
-                            .addComponent(diagnosisTxt))
+                            .addComponent(diagnosisTxt)
+                            .addComponent(RFVTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hospTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pNameTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE))
                         .addGap(76, 76, 76))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientVariablePaneLayout.createSequentialGroup()
                         .addGroup(PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)
                             .addGroup(PatientVariablePaneLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(addBtn)
@@ -207,7 +224,9 @@ public class Doctor extends javax.swing.JFrame {
             .addGroup(PatientVariablePaneLayout.createSequentialGroup()
                 .addGap(273, 273, 273)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
 
         PatientVariablePaneLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addBtn, updateBtn, viewBtn});
@@ -215,8 +234,13 @@ public class Doctor extends javax.swing.JFrame {
         PatientVariablePaneLayout.setVerticalGroup(
             PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PatientVariablePaneLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PatientVariablePaneLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PatientVariablePaneLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jButton1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -225,11 +249,20 @@ public class Doctor extends javax.swing.JFrame {
                     .addComponent(viewBtn)
                     .addComponent(addBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(20, 20, 20)
-                .addComponent(jLabel2)
+                .addGroup(PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientVariablePaneLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientVariablePaneLayout.createSequentialGroup()
+                        .addComponent(pNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(hospTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(RFV)
+                .addGroup(PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RFV)
+                    .addComponent(RFVTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -249,126 +282,131 @@ public class Doctor extends javax.swing.JFrame {
 
         PatientVariablePaneLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {diagnosisTxt, oxyLvlTxt, pulseRateTxt});
 
-        pNameTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pNameTxtActionPerformed(evt);
-            }
-        });
-
-        jButton1.setBackground(new java.awt.Color(255, 0, 0));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("Signout");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(396, 396, 396)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(hospTxt)
-                    .addComponent(RFVTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pNameTxt, 0, 379, Short.MAX_VALUE))
-                .addGap(89, 89, 89))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(24, Short.MAX_VALUE)
-                    .addComponent(PatientVariablePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+                .addGap(71, 71, 71)
+                .addComponent(PatientVariablePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(123, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
-                .addComponent(pNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(hospTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(RFVTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(164, 164, 164))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(47, Short.MAX_VALUE)
-                    .addComponent(PatientVariablePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(23, Short.MAX_VALUE)))
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addComponent(PatientVariablePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pNameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pNameTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pNameTxtActionPerformed
-
-    public class Checkup{
-        public static void CreateCheckup(String name, String RFV, String Hospital, String pulse, String oxyLvl, String diagnosis){
-            try{
+   public class Checkup{
+        
+        
+        public static void CreateCheckup(String pName, String hospital, String RFV, String pulseRate, String oxygenLevel, String diagnosis){
+            
+             try{
             java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalsystem", "root", "root");
             
             System.out.println("connection open");
             java.sql.Statement statement = connection.createStatement();
-           //tring query = "INSERT INTO hospitalsystem.patient (Name,Doctor,Hospital,Community,City,Date,Time,Gender,RFV) values(?,?,?,?,?,?,?,?,?)";
-            String query = "INSERT * FROM hospitalsystem.doctor (PatientName,Hospital,RFV,PulseRate,OxygenLevel,Diagnosis) values(?,?,?,?,?,?)";
+            String query = "INSERT INTO hospitalsystem.doctor (PatientName,Hospital,RFV,PulseRate,OxygenLevel,Diagnosis) values(?,?,?,?,?,?)";
+            
             java.sql.PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString(1,name);
-            preparedStmt.setString(2,RFV);
-            preparedStmt.setString(3,Hospital);
-            preparedStmt.setString(4,pulse);
-            preparedStmt.setString(5,oxyLvl);
+            preparedStmt.setString(1,pName);
+            preparedStmt.setString(2,hospital);
+            preparedStmt.setString(3,RFV);
+            preparedStmt.setString(4,pulseRate);
+            preparedStmt.setString(5,oxygenLevel);
             preparedStmt.setString(6,diagnosis);
-            System.out.println("connection ");
            
 
             preparedStmt.execute();
-            System.out.println("connection open");
-                        JOptionPane.showMessageDialog(null,"Details Added");
+                        JOptionPane.showMessageDialog(null,"NAme Added");
 
              connection.close();
         }
         catch(Exception e){
-             JOptionPane.showMessageDialog(null,"please add data !");
+             JOptionPane.showMessageDialog(null,"please add data in correct format!");
             
             
 
     
-    }             
+    }                     
+//            
+
         }
-    }
+    
+    } 
+     
     
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
        //tring name = (String) pNameTxt.getSelectedItem();
         
-        Patient p = (Patient) pNameTxt.getSelectedItem();
-        
+        //Patient p = (Patient) pNameTxt.getSelectedItem();
+        String pName = pNameTxt.getText();
+        String hospital = hospTxt.getText();
         String RFV = RFVTxt.getText();
-        String Hospital = hospTxt.getText();
-        String pulse = pulseRateTxt.getText();
-        String oxyLvl = oxyLvlTxt.getText();
+        String pulseRate = pulseRateTxt.getText();
+        String oxygenLevel = oxyLvlTxt.getText();
         String diagnosis = diagnosisTxt.getText();
+       
+
         
-        Checkup.CreateCheckup(p.name,RFV,Hospital,pulse,oxyLvl,diagnosis);
+
         
-         pNameTxt.setSelectedItem("");
-         RFVTxt.setText("");
-         hospTxt.getText();
-         pulseRateTxt.setText("");
-         oxyLvlTxt.setText("");
-         diagnosisTxt.setText("");
+        Checkup.CreateCheckup(pName,hospital,RFV,pulseRate,oxygenLevel,diagnosis);
+        
+        pNameTxt.setText("");
+        hospTxt.setText("");
+        RFVTxt.setText("");
+        pulseRateTxt.setText("");
+        oxyLvlTxt.setText("");
+        diagnosisTxt.setText("");
+        
+            doctor_table();
          
     }//GEN-LAST:event_addBtnActionPerformed
 
+    
+    public void doctor_table(){
+        try{
+            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalsystem", "root", "root");
+            
+            System.out.println("connection open");
+            java.sql.Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM hospitalsystem.doctor;";
+           // statement.executeUpdate("insert into hospitalsystem.login" + "(role, username, password)" + "values ('"+role+"','"+username+"', '"+password+"')");
+            JOptionPane.showMessageDialog(null, "User successfully added!");
+            java.sql.ResultSet rs = statement.executeQuery(sql);
+            while(rs.next()){
+                String pName = rs.getString("PatientName");
+                String hospital = rs.getString("Hospital");
+                String RFV = rs.getString("RFV");
+                String pulseRate = rs.getString("PulseRate");
+                String oxygenLevel = rs.getString("OxygenLevel");
+                String diagnosis = rs.getString("Diagnosis");
+                
+                
+                String tbData[] = {pName,hospital,RFV,pulseRate,oxygenLevel,diagnosis};
+                DefaultTableModel tb1Model = (DefaultTableModel)patientTable.getModel();
+                
+                tb1Model.addRow(tbData);
+                 System.out.println("Ashish well done");
+                
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"please add data in correct format!");
+
+    
+    }                                 
+    }
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
          setVisible(false);
@@ -377,23 +415,23 @@ public class Doctor extends javax.swing.JFrame {
 
     private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
         // TODO add your handling code here:
-        String hospital = hospTxt.getText();
-        
-        try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalsystem", "root", "root");
-            
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-          //  statement.executeUpdate("insert into hospitalsystem.login" + "(role, username, password)" + "values ('"+role+"','"+username+"', '"+password+"')");
-            JOptionPane.showMessageDialog(null, "User successfully added!");
-            java.sql.ResultSet rs=statement.executeQuery("SELECT * FROM hospitalsystem.patient");
-           // patientTable.setModel(DbUtils.resultSetToTableModel(rs));
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null,"please add data in correct format!");
-
-    
-    }                                         
+//        String hospital = hospTxt.getText();
+//        
+//        try{
+//            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalsystem", "root", "root");
+//            
+//            System.out.println("connection open");
+//            java.sql.Statement statement = connection.createStatement();
+//          //  statement.executeUpdate("insert into hospitalsystem.login" + "(role, username, password)" + "values ('"+role+"','"+username+"', '"+password+"')");
+//            JOptionPane.showMessageDialog(null, "User successfully added!");
+//            java.sql.ResultSet rs=statement.executeQuery("SELECT * FROM hospitalsystem.patient");
+//           // patientTable.setModel(DbUtils.resultSetToTableModel(rs));
+//        }
+//        catch(Exception e){
+//            JOptionPane.showMessageDialog(null,"please add data in correct format!");
+//
+//    
+//    }                                         
         
     }//GEN-LAST:event_viewBtnActionPerformed
 
@@ -448,7 +486,7 @@ public class Doctor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField oxyLvlTxt;
-    private javax.swing.JComboBox pNameTxt;
+    private javax.swing.JTextField pNameTxt;
     private javax.swing.JTable patientTable;
     private javax.swing.JTextField pulseRateTxt;
     private javax.swing.JButton updateBtn;

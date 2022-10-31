@@ -382,14 +382,7 @@ public class patientDetails extends javax.swing.JFrame {
 
     
     }                     
-//            try{
-//                Connection connection = ConnectionProvider.Connect();
-//                Statement statement = connection.createStatement();
-//                
-//            }
-//            catch(Exception e){
-//                
-//            }
+//            
 
         }
     
@@ -435,65 +428,38 @@ public class patientDetails extends javax.swing.JFrame {
     public void patient_table(){
         try{
             java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalsystem", "root", "root");
-            //stmt = con.createStatement();
+            
+            System.out.println("connection open");
             java.sql.Statement statement = connection.createStatement();
-            //java.sql.PreparedStatement preparedStmt = connection.prepareStatement("SELECT * FROM patient");
-            
-            System.out.println("connection table");
-            String sql = "select * from hospitalsystem.patient";
-            ResultSet rs = statement.executeQuery(sql);
-            //preparedStmt = connection.prepareStatement("SELECT * FROM hospitalsystem.patient;");
-            //java.sql.ResultSet rs=preparedStmt.executeQuery();
-                        System.out.println("connection rs");
-
-          //  rs = preparedStmt.excecuteQuery();
-            
-            java.sql.ResultSetMetaData Rsm = rs.getMetaData();
+            String sql = "SELECT * FROM hospitalsystem.patient;";
+           // statement.executeUpdate("insert into hospitalsystem.login" + "(role, username, password)" + "values ('"+role+"','"+username+"', '"+password+"')");
             JOptionPane.showMessageDialog(null, "User successfully added!");
-            int c;
-            c = Rsm.getColumnCount();
-            System.out.println("connection crsm");
-
-            
-            DefaultTableModel df = (DefaultTableModel)patientTable.getModel();
-            df.setRowCount(0);
-           // patient = new patientDetails();
-            
+            java.sql.ResultSet rs = statement.executeQuery(sql);
             while(rs.next()){
-                Vector v2 = new Vector();
-                            System.out.println("connection vecor");
+                String name = rs.getString("Name");
+                String doctor = rs.getString("Doctor");
+                String hospital = rs.getString("Hospital");
+                String community = rs.getString("Community");
+                String city = rs.getString("City");
+                String date = rs.getString("Date");
+                String time = rs.getString("Time");
+                String gender = rs.getString("Gender");
+                String RFV = rs.getString("RFV");
 
                 
-                for(int i=1; i<=c; i++){
-                                System.out.println("connection for");
-//                      Object[] row = new Object[10];
-//                      row[0] = 
-
-                        v2.add(rs.getString("Name"));
-                        v2.add(rs.getString("Doctor"));
-                        v2.add(rs.getString("Hospital"));
-                        v2.add(rs.getString("Community"));
-                        v2.add(rs.getString("City"));
-                        v2.add(rs.getString("Date"));
-                        v2.add(rs.getString("Time"));
-                        v2.add(rs.getString("Gender"));
-                        v2.add(rs.getString("RSF"));
-
-                    System.out.println("Success");
-                }
-                //System.out.print(v2);
-                df.addRow(v2);
+                String tbData[] = {name,doctor,hospital,community,city,date,time,gender,RFV};
+                DefaultTableModel tb1Model = (DefaultTableModel)patientTable.getModel();
                 
-               System.out.println("fail");
-
+                tb1Model.addRow(tbData);
+                 System.out.println("Ashish well done");
+                
             }
-            connection.close();
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Not Read!");
+            JOptionPane.showMessageDialog(null,"please add data in correct format!");
 
     
-    }                         
+    }                                 
     }
     /**
      * @param args the command line arguments
