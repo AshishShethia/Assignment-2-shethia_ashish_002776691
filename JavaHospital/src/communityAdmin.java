@@ -1,4 +1,5 @@
 
+import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Community;
@@ -22,8 +23,7 @@ public class communityAdmin extends javax.swing.JFrame {
     public communityAdmin() {
         initComponents();
         
-         this.history = history;
-         populateTable();
+        
     }
 
    
@@ -49,7 +49,7 @@ public class communityAdmin extends javax.swing.JFrame {
         cityTxt = new javax.swing.JTextField();
         hospitalTxt = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        CommunityTbl = new javax.swing.JTable();
+        communityTable = new javax.swing.JTable();
         addBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
@@ -57,6 +57,8 @@ public class communityAdmin extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -77,18 +79,20 @@ public class communityAdmin extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Hospital");
 
-        CommunityTbl.setModel(new javax.swing.table.DefaultTableModel(
+        communityTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Person", "House", "Community", "City", "Hospital"
+                "House", "Person", "Community", "City", "Hospital"
             }
         ));
-        jScrollPane1.setViewportView(CommunityTbl);
+        communityTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                communityTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(communityTable);
 
         addBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         addBtn.setText("ADD");
@@ -100,9 +104,19 @@ public class communityAdmin extends javax.swing.JFrame {
 
         updateBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         updateBtn.setText("UPDATE");
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtnActionPerformed(evt);
+            }
+        });
 
         deleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         deleteBtn.setText("DELETE");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
 
         personTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Patient", "Doctor", "Visitor" }));
 
@@ -135,21 +149,24 @@ public class communityAdmin extends javax.swing.JFrame {
                             .addComponent(communityTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                             .addComponent(cityTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                             .addComponent(hospitalTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                            .addComponent(personTxt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(68, 68, 68)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(personTxt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(176, 176, 176)
-                        .addComponent(addBtn)
-                        .addGap(240, 240, 240)
+                        .addGap(214, 214, 214)
+                        .addComponent(addBtn)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(updateBtn)
-                        .addGap(81, 81, 81)
-                        .addComponent(deleteBtn)))
-                .addContainerGap(136, Short.MAX_VALUE))
+                        .addGap(183, 183, 183)
+                        .addComponent(deleteBtn)
+                        .addGap(119, 119, 119))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68))))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(327, 327, 327)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(178, 178, 178)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(185, 185, 185))
         );
@@ -163,9 +180,9 @@ public class communityAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -185,14 +202,17 @@ public class communityAdmin extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(hospitalTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                            .addComponent(hospitalTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBtn)
                     .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -213,6 +233,47 @@ public class communityAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+     public class Community{
+        
+        
+        public static void CreateCommunity(String house, String person, String community, String city, String hospital){
+            
+             try{
+            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalsystem", "root", "root");
+            
+            System.out.println("connection open");
+            java.sql.Statement statement = connection.createStatement();
+            String query = "INSERT INTO hospitalsystem.community (House,Person,Community,City,Hospital) values(?,?,?,?,?)";
+            
+            java.sql.PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setString(1,house);
+            preparedStmt.setString(2,person);
+            preparedStmt.setString(3,community);
+            preparedStmt.setString(4,city);
+            preparedStmt.setString(5,hospital);
+           
+
+            preparedStmt.execute();
+                        JOptionPane.showMessageDialog(null,"Details Added");
+
+             connection.close();
+        }
+        catch(Exception e){
+             JOptionPane.showMessageDialog(null,"please add data in correct format!");
+            
+            
+
+    
+    }                     
+//            
+
+        }
+    
+    } 
+     
+    
+    
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
         
@@ -225,15 +286,8 @@ public class communityAdmin extends javax.swing.JFrame {
         String hospital = hospitalTxt.getText();
 
         
-          
+         Community.CreateCommunity(house,person,community,city,hospital);  
         
-        Community vs = history.addNewCommunity();
-        
-        vs.setHouse(house);
-        vs.setPerson(person);
-        vs.setCommunity(community);
-        vs.setCity(city);
-        vs.setHospital(hospital);
         
         JOptionPane.showMessageDialog(this,"New Employ details Added");
         
@@ -243,31 +297,42 @@ public class communityAdmin extends javax.swing.JFrame {
         communityTxt.setText("");
         cityTxt.setText("");
         hospitalTxt.setText("");
+        community_table();
     }//GEN-LAST:event_addBtnActionPerformed
 
-    
-    private void populateTable() {
-        
-        DefaultTableModel model = (DefaultTableModel) CommunityTbl.getModel(); 
-        model.setRowCount(0);
-        
-        for(Community vs : history.getHistory()){
-            Object[] row = new Object[6];
-            row[0] = vs;
-            row[1] = vs.getHouse();
-            row[3] = vs.getPerson();
-            row[2] = vs.getCity();
-
-            row[4] = vs.getCommunity();
-            row[5] = vs.getHospital();
+    public void community_table(){
+        try{
+            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalsystem", "root", "root");
             
-            
-            
-            model.addRow(row);
-            System.out.println("TAble success");
+            System.out.println("connection open");
+            java.sql.Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM hospitalsystem.community;";
+           // statement.executeUpdate("insert into hospitalsystem.login" + "(role, username, password)" + "values ('"+role+"','"+username+"', '"+password+"')");
+            //JOptionPane.showMessageDialog(null, "User successfully added!");
+            java.sql.ResultSet rs = statement.executeQuery(sql);
+            while(rs.next()){
+                String house = rs.getString("House");
+                String person = rs.getString("Person");
+                String community = rs.getString("Community");
+                String city = rs.getString("City");
+                String hospital = rs.getString("Hospital");
+                
+                
+                String tbData[] = {house,person,community,city,hospital};
+                DefaultTableModel tb1Model = (DefaultTableModel)communityTable.getModel();
+                
+                tb1Model.addRow(tbData);
+                 System.out.println("Ashish well done");
+                
+            }
         }
-       
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"please add data in correct format!");
+
+    
+    }                                 
     }
+    
     
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -275,6 +340,78 @@ public class communityAdmin extends javax.swing.JFrame {
         setVisible(false);
         new Login().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    
+    
+    
+    
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        // TODO add your handling code here:
+          DefaultTableModel tb1Model = (DefaultTableModel)communityTable.getModel();
+        if(communityTable.getSelectedRowCount()== 1){
+            String house = houseTxt.getText();
+            String person = (String) personTxt.getSelectedItem();
+            String community = communityTxt.getText();
+            String city = cityTxt.getText();
+            String hospital = hospitalTxt.getText();
+            
+            
+            
+            tb1Model.setValueAt(house,communityTable.getSelectedRow(), 0);
+            tb1Model.setValueAt(person,communityTable.getSelectedRow(), 1);
+            tb1Model.setValueAt(community,communityTable.getSelectedRow(), 2);
+            tb1Model.setValueAt(city,communityTable.getSelectedRow(), 3);
+            tb1Model.setValueAt(hospital,communityTable.getSelectedRow(), 4);
+            
+            
+            JOptionPane.showMessageDialog(this,"Update Successfully");
+
+            
+        }else{
+            if(communityTable.getRowCount()== 0){
+                     JOptionPane.showMessageDialog(this,"Table is Empty");
+
+            }else{
+                     JOptionPane.showMessageDialog(this,"Please Select Single Row for Update");
+
+            }
+        }
+          
+    }//GEN-LAST:event_updateBtnActionPerformed
+
+    private void communityTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_communityTableMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel tb1Model = (DefaultTableModel)communityTable.getModel();
+        
+        String tb1house = tb1Model.getValueAt(communityTable.getSelectedRow(),0).toString();
+        String tb1person = tb1Model.getValueAt(communityTable.getSelectedRow(),1).toString();
+        String tb1community = tb1Model.getValueAt(communityTable.getSelectedRow(),2).toString();
+        String tb1city = tb1Model.getValueAt(communityTable.getSelectedRow(),3).toString();
+        String tb1hospital = tb1Model.getValueAt(communityTable.getSelectedRow(),4).toString();
+       
+        
+        houseTxt.setText(tb1house);
+        personTxt.setSelectedItem(tb1person);
+        communityTxt.setText(tb1community);
+        cityTxt.setText(tb1city);
+        hospitalTxt.setText(tb1hospital);
+      
+    }//GEN-LAST:event_communityTableMouseClicked
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // TODO add your handling code here:
+         DefaultTableModel tb1Model = (DefaultTableModel)communityTable.getModel();
+      
+      if(communityTable.getSelectedRowCount()==1){
+          tb1Model.removeRow(communityTable.getSelectedRow());
+      }else{
+          if(communityTable.getRowCount()==0){
+              JOptionPane.showMessageDialog(null,"Table is Empty");
+          } else{
+              JOptionPane.showMessageDialog(null,"Please Select Single Row");
+          }
+      }
+    }//GEN-LAST:event_deleteBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -312,9 +449,9 @@ public class communityAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable CommunityTbl;
     private javax.swing.JButton addBtn;
     private javax.swing.JTextField cityTxt;
+    private javax.swing.JTable communityTable;
     private javax.swing.JTextField communityTxt;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JTextField hospitalTxt;

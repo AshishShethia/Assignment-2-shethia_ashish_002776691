@@ -101,7 +101,7 @@ public class Doctor extends javax.swing.JFrame {
         oxyLvlTxt = new javax.swing.JTextField();
         diagnosisTxt = new javax.swing.JTextField();
         updateBtn = new javax.swing.JButton();
-        viewBtn = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
         addBtn = new javax.swing.JButton();
         pNameTxt = new javax.swing.JTextField();
         hospTxt = new javax.swing.JTextField();
@@ -126,6 +126,11 @@ public class Doctor extends javax.swing.JFrame {
                 "PatientName", "Hospital", "RFV", "PulseRate", "OxygenLevel", "Diagnosis"
             }
         ));
+        patientTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                patientTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(patientTable);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -154,12 +159,17 @@ public class Doctor extends javax.swing.JFrame {
 
         updateBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         updateBtn.setText("Update");
-
-        viewBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        viewBtn.setText("View");
-        viewBtn.addActionListener(new java.awt.event.ActionListener() {
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewBtnActionPerformed(evt);
+                updateBtnActionPerformed(evt);
+            }
+        });
+
+        deleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        deleteBtn.setText("Delete");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
             }
         });
 
@@ -219,7 +229,7 @@ public class Doctor extends javax.swing.JFrame {
                                 .addGap(37, 37, 37)
                                 .addComponent(updateBtn)
                                 .addGap(46, 46, 46)
-                                .addComponent(viewBtn)))
+                                .addComponent(deleteBtn)))
                         .addGap(67, 67, 67))))
             .addGroup(PatientVariablePaneLayout.createSequentialGroup()
                 .addGap(273, 273, 273)
@@ -229,7 +239,7 @@ public class Doctor extends javax.swing.JFrame {
                 .addGap(36, 36, 36))
         );
 
-        PatientVariablePaneLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addBtn, updateBtn, viewBtn});
+        PatientVariablePaneLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addBtn, deleteBtn, updateBtn});
 
         PatientVariablePaneLayout.setVerticalGroup(
             PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,7 +256,7 @@ public class Doctor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewBtn)
+                    .addComponent(deleteBtn)
                     .addComponent(addBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,7 +288,7 @@ public class Doctor extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
-        PatientVariablePaneLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {addBtn, updateBtn, viewBtn});
+        PatientVariablePaneLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {addBtn, deleteBtn, updateBtn});
 
         PatientVariablePaneLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {diagnosisTxt, oxyLvlTxt, pulseRateTxt});
 
@@ -287,9 +297,9 @@ public class Doctor extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addGap(67, 67, 67)
                 .addComponent(PatientVariablePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,27 +423,78 @@ public class Doctor extends javax.swing.JFrame {
         new Login().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
-//        String hospital = hospTxt.getText();
-//        
-//        try{
-//            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalsystem", "root", "root");
-//            
-//            System.out.println("connection open");
-//            java.sql.Statement statement = connection.createStatement();
-//          //  statement.executeUpdate("insert into hospitalsystem.login" + "(role, username, password)" + "values ('"+role+"','"+username+"', '"+password+"')");
-//            JOptionPane.showMessageDialog(null, "User successfully added!");
-//            java.sql.ResultSet rs=statement.executeQuery("SELECT * FROM hospitalsystem.patient");
-//           // patientTable.setModel(DbUtils.resultSetToTableModel(rs));
-//        }
-//        catch(Exception e){
-//            JOptionPane.showMessageDialog(null,"please add data in correct format!");
-//
-//    
-//    }                                         
+      DefaultTableModel tb1Model = (DefaultTableModel)patientTable.getModel();
+      
+      if(patientTable.getSelectedRowCount()==1){
+          tb1Model.removeRow(patientTable.getSelectedRow());
+      }else{
+          if(patientTable.getRowCount()==0){
+              JOptionPane.showMessageDialog(null,"Table is Empty");
+          } else{
+              JOptionPane.showMessageDialog(null,"Please Select Single Row");
+          }
+      }
         
-    }//GEN-LAST:event_viewBtnActionPerformed
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void patientTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientTableMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel tb1Model = (DefaultTableModel)patientTable.getModel();
+        
+        String tb1pName = tb1Model.getValueAt(patientTable.getSelectedRow(),0).toString();
+        String tb1hosp = tb1Model.getValueAt(patientTable.getSelectedRow(),1).toString();
+        String tb1RFV = tb1Model.getValueAt(patientTable.getSelectedRow(),2).toString();
+        String tb1pulse = tb1Model.getValueAt(patientTable.getSelectedRow(),3).toString();
+        String tb1oxyLvl = tb1Model.getValueAt(patientTable.getSelectedRow(),4).toString();
+        String tb1Diagnosis = tb1Model.getValueAt(patientTable.getSelectedRow(),5).toString();
+       
+        
+        pNameTxt.setText(tb1pName);
+        hospTxt.setText(tb1hosp);
+        RFVTxt.setText(tb1RFV);
+        pulseRateTxt.setText(tb1pulse);
+        oxyLvlTxt.setText(tb1oxyLvl);
+        diagnosisTxt.setText(tb1Diagnosis);
+        
+    }//GEN-LAST:event_patientTableMouseClicked
+
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel tb1Model = (DefaultTableModel)patientTable.getModel();
+        if(patientTable.getSelectedRowCount()== 1){
+            String name = pNameTxt.getText();
+            String hosp = hospTxt.getText();
+            String RFV = RFVTxt.getText();
+            String pulse = pulseRateTxt.getText();
+            String oxy = oxyLvlTxt.getText();
+            String diagnosis = diagnosisTxt.getText();
+            
+            
+            
+            tb1Model.setValueAt(name,patientTable.getSelectedRow(), 0);
+            tb1Model.setValueAt(hosp,patientTable.getSelectedRow(), 1);
+            tb1Model.setValueAt(RFV,patientTable.getSelectedRow(), 2);
+            tb1Model.setValueAt(pulse,patientTable.getSelectedRow(), 3);
+            tb1Model.setValueAt(oxy,patientTable.getSelectedRow(), 4);
+            tb1Model.setValueAt(diagnosis,patientTable.getSelectedRow(), 5);
+            
+            
+            JOptionPane.showMessageDialog(this,"Update Successfully");
+
+            
+        }else{
+            if(patientTable.getRowCount()== 0){
+                     JOptionPane.showMessageDialog(this,"Table is Empty");
+
+            }else{
+                     JOptionPane.showMessageDialog(this,"Please Select Single Row for Update");
+
+            }
+        }
+            
+    }//GEN-LAST:event_updateBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -475,6 +536,7 @@ public class Doctor extends javax.swing.JFrame {
     private javax.swing.JLabel RFV;
     private javax.swing.JTextField RFVTxt;
     private javax.swing.JButton addBtn;
+    private javax.swing.JButton deleteBtn;
     private javax.swing.JTextField diagnosisTxt;
     private javax.swing.JTextField hospTxt;
     private javax.swing.JButton jButton1;
@@ -490,6 +552,5 @@ public class Doctor extends javax.swing.JFrame {
     private javax.swing.JTable patientTable;
     private javax.swing.JTextField pulseRateTxt;
     private javax.swing.JButton updateBtn;
-    private javax.swing.JButton viewBtn;
     // End of variables declaration//GEN-END:variables
 }
