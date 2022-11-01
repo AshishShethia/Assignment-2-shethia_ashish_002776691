@@ -49,6 +49,7 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LOGIN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         jPanel1.setLayout(null);
 
         usernamelbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -72,6 +73,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(roleTxt);
         roleTxt.setBounds(189, 233, 199, 22);
 
+        submitBtn.setBackground(new java.awt.Color(102, 255, 102));
         submitBtn.setText("Submit");
         submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,7 +81,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(submitBtn);
-        submitBtn.setBounds(139, 305, 72, 23);
+        submitBtn.setBounds(190, 300, 72, 23);
         jPanel1.add(passwordTxt);
         passwordTxt.setBounds(189, 187, 199, 22);
 
@@ -96,8 +98,8 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,6 +110,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
@@ -115,6 +118,14 @@ public class Login extends javax.swing.JFrame {
         String role = roleTxt.getSelectedItem().toString();
         String username = usernameTxt.getText();
         String password = passwordTxt.getText();
+        if(usernameTxt.getText().isEmpty()|| passwordTxt.getText().isEmpty()){
+                 JOptionPane.showMessageDialog(null, "Plz Enter Details!");
+
+        
+        } else{
+        
+        
+        
         
         try{
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalsystem", "root", "root");
@@ -155,6 +166,7 @@ public class Login extends javax.swing.JFrame {
      
 
     }//GEN-LAST:event_submitBtnActionPerformed
+    }
     }
     /**
      * @param args the command line arguments

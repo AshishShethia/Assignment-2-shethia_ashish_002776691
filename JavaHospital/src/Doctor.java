@@ -157,6 +157,19 @@ public class Doctor extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Diagnosis:");
 
+        pulseRateTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pulseRateTxtKeyPressed(evt);
+            }
+        });
+
+        oxyLvlTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                oxyLvlTxtKeyPressed(evt);
+            }
+        });
+
+        updateBtn.setBackground(new java.awt.Color(255, 255, 102));
         updateBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         updateBtn.setText("Update");
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -165,6 +178,7 @@ public class Doctor extends javax.swing.JFrame {
             }
         });
 
+        deleteBtn.setBackground(new java.awt.Color(255, 0, 0));
         deleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         deleteBtn.setText("Delete");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -173,11 +187,18 @@ public class Doctor extends javax.swing.JFrame {
             }
         });
 
+        addBtn.setBackground(new java.awt.Color(51, 255, 51));
         addBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         addBtn.setText("ADD");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addBtnActionPerformed(evt);
+            }
+        });
+
+        pNameTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pNameTxtKeyPressed(evt);
             }
         });
 
@@ -208,9 +229,7 @@ public class Doctor extends javax.swing.JFrame {
                                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(RFV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGroup(PatientVariablePaneLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(122, 122, 122)
                         .addGroup(PatientVariablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(pulseRateTxt)
@@ -363,12 +382,20 @@ public class Doctor extends javax.swing.JFrame {
         String pulseRate = pulseRateTxt.getText();
         String oxygenLevel = oxyLvlTxt.getText();
         String diagnosis = diagnosisTxt.getText();
+        
+        if(pNameTxt.getText().isEmpty()|| hospTxt.getText().isEmpty()||RFVTxt.getText().isEmpty()||pulseRateTxt.getText().isEmpty()||oxyLvlTxt.getText().isEmpty()||diagnosisTxt.getText().isEmpty()            ){
+                 JOptionPane.showMessageDialog(null, "Plz Enter Details!");
+
+        
+        } else{
        
 
         
 
         
-        Checkup.CreateCheckup(pName,hospital,RFV,pulseRate,oxygenLevel,diagnosis);
+            Checkup.CreateCheckup(pName,hospital,RFV,pulseRate,oxygenLevel,diagnosis);
+        
+        }
         
         pNameTxt.setText("");
         hospTxt.setText("");
@@ -390,7 +417,7 @@ public class Doctor extends javax.swing.JFrame {
             java.sql.Statement statement = connection.createStatement();
             String sql = "SELECT * FROM hospitalsystem.doctor;";
            // statement.executeUpdate("insert into hospitalsystem.login" + "(role, username, password)" + "values ('"+role+"','"+username+"', '"+password+"')");
-            JOptionPane.showMessageDialog(null, "User successfully added!");
+          //  JOptionPane.showMessageDialog(null, "User successfully added!");
             java.sql.ResultSet rs = statement.executeQuery(sql);
             while(rs.next()){
                 String pName = rs.getString("PatientName");
@@ -495,6 +522,42 @@ public class Doctor extends javax.swing.JFrame {
         }
             
     }//GEN-LAST:event_updateBtnActionPerformed
+
+    private void pulseRateTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pulseRateTxtKeyPressed
+        // TODO add your handling code here:
+//        char c = evt.getKeyChar();
+//        if(!Character.isDigit(c)){
+//            
+//            JOptionPane.showMessageDialog(this, "Please input digits.");
+//        
+//        evt.consume();
+//        
+//        }
+    }//GEN-LAST:event_pulseRateTxtKeyPressed
+
+    private void oxyLvlTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_oxyLvlTxtKeyPressed
+        // TODO add your handling code here:
+//        char c = evt.getKeyChar();
+//        if(!Character.isDigit(c)){
+//            
+//            JOptionPane.showMessageDialog(this, "Please input digits.");
+//        
+//        evt.consume();
+//        
+//        }
+    }//GEN-LAST:event_oxyLvlTxtKeyPressed
+
+    private void pNameTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pNameTxtKeyPressed
+        // TODO add your handling code here:
+//        char c = evt.getKeyChar();
+//        if(!Character.isAlphabetic(c)){
+//            
+//            JOptionPane.showMessageDialog(this, "Please input alphabets only.");
+//        
+//        evt.consume();
+//        
+//        }
+    }//GEN-LAST:event_pNameTxtKeyPressed
 
     /**
      * @param args the command line arguments

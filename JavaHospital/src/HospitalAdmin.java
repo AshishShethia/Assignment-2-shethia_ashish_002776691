@@ -5,6 +5,7 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.HospitalAdminHistory;
+import model.Validate;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -20,11 +21,10 @@ public class HospitalAdmin extends javax.swing.JFrame {
     /**
      * Creates new form HospitalAdmin
      */
-    HospitalAdminHistory history;
+    
     public HospitalAdmin() {
         initComponents();
-        this.history = history;
-        Hospital_table();
+        
         
     }
 
@@ -49,14 +49,13 @@ public class HospitalAdmin extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         HospNameTxt = new javax.swing.JTextField();
         communityTxt = new javax.swing.JTextField();
-        cityTxt = new javax.swing.JTextField();
+        numberTxt = new javax.swing.JTextField();
         addBtn = new javax.swing.JButton();
         personTxt = new javax.swing.JComboBox<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        addressTxt = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         hospitalTable = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
+        emailTxt = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -99,14 +98,15 @@ public class HospitalAdmin extends javax.swing.JFrame {
         jLabel4.setText("Community:");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("City:");
+        jLabel5.setText("Number");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Person");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setText("Address:");
+        jLabel7.setText("Email");
 
+        addBtn.setBackground(new java.awt.Color(102, 255, 102));
         addBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         addBtn.setText("ADD");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -115,19 +115,12 @@ public class HospitalAdmin extends javax.swing.JFrame {
             }
         });
 
-        personTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Patient", "Doctor", " " }));
-
-        addressTxt.setColumns(20);
-        addressTxt.setRows(5);
-        jScrollPane2.setViewportView(addressTxt);
+        personTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Patient", "Doctor", "Visitor", " " }));
 
         hospitalTable.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         hospitalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Hospital Name", "Community", "City", "Person", "Address"
@@ -152,27 +145,27 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel5))
                 .addGap(75, 75, 75)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(HospNameTxt)
                     .addComponent(communityTxt)
-                    .addComponent(cityTxt)
-                    .addComponent(personTxt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                    .addComponent(personTxt, 0, 234, Short.MAX_VALUE)
+                    .addComponent(numberTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                    .addComponent(emailTxt))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(307, 307, 307)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(280, 280, 280)
+                .addGap(299, 299, 299)
                 .addComponent(addBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -193,16 +186,16 @@ public class HospitalAdmin extends javax.swing.JFrame {
                             .addComponent(communityTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(cityTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(personTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(numberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,7 +203,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(35, 35, 35)
                 .addComponent(addBtn)
-                .addContainerGap(551, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Hospital Details", jPanel1);
@@ -245,6 +238,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
         roleTxt.setEditable(false);
         roleTxt.setText("Doctor");
 
+        dAddBtn.setBackground(new java.awt.Color(51, 255, 51));
         dAddBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         dAddBtn.setText("ADD");
         dAddBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -316,7 +310,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
                     .addComponent(roleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(dAddBtn)
-                .addContainerGap(559, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Doctor", jPanel2);
@@ -341,6 +335,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
         proleTxt.setEditable(false);
         proleTxt.setText("Patient");
 
+        pAddBtn.setBackground(new java.awt.Color(51, 255, 51));
         pAddBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         pAddBtn.setText("ADD");
         pAddBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -426,7 +421,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
                     .addComponent(proleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addComponent(pAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(508, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Patient", jPanel3);
@@ -446,27 +441,28 @@ public class HospitalAdmin extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     
     public class Hospital{
         
         
-        public static void CreateHospital(String Hospitalname, String community, String city, String person,String address  ){
+        public static void CreateHospital(String Hospitalname, String community, String person, String number,String email  ){
             
              try{
             java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalsystem", "root", "root");
             
             System.out.println("connection open");
             java.sql.Statement statement = connection.createStatement();
-            String query = "INSERT INTO hospitalsystem.hospital (HospitalName,Community,City,Person,Address) values(?,?,?,?,?)";
+            String query = "INSERT INTO hospitalsystem.hospital (HospitalName,Community,Person,Number,Email) values(?,?,?,?,?)";
             
             java.sql.PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1,Hospitalname);
             preparedStmt.setString(2,community);
-            preparedStmt.setString(3,city);
-            preparedStmt.setString(4,person);
-            preparedStmt.setString(5,address);
+            preparedStmt.setString(3,person);
+            preparedStmt.setString(4,number);
+            preparedStmt.setString(5,email);
             
 
             preparedStmt.execute();
@@ -500,42 +496,71 @@ public class HospitalAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         String Hospitalname = HospNameTxt.getText();
         String community = communityTxt.getText();
-        String city = cityTxt.getText();
+        String number = numberTxt.getText();
         String person = (String) personTxt.getSelectedItem();
-        String address = addressTxt.getText();
+        String email = emailTxt.getText();
+        boolean status=Validate.validateEmail(emailTxt.getText());
+        boolean status1=Validate.validatePhone(numberTxt.getText());
 
         
+        if(status){
+                             JOptionPane.showMessageDialog(null, "Email Valid!");
+
+        } else {
+                             JOptionPane.showMessageDialog(null, "Email not Valid!");
+
+        }
+        
+        
+        
+        if(status1){
+                                         JOptionPane.showMessageDialog(null, "number Valid!");
+
+        } else {
+                                         JOptionPane.showMessageDialog(null, "number not Valid!");
+
+        }
+
+        if(HospNameTxt.getText().isEmpty()|| communityTxt.getText().isEmpty()||numberTxt.getText().isEmpty()||emailTxt.getText().isEmpty()           ){
+                 JOptionPane.showMessageDialog(null, "Plz Enter Details!");
 
         
-        Hospital.CreateHospital(Hospitalname,community,city,person,address);
+        }
+         
         
+        else {
+
+        
+         Hospital.CreateHospital(Hospitalname,community,person,number,email);
+         Hospital_table();
+        }
         HospNameTxt.setText("");
         communityTxt.setText("");
         
-        cityTxt.setText("");
+        numberTxt.setText("");
         personTxt.setSelectedItem("");
-        addressTxt.setText("");
+        emailTxt.setText("");
         
-         Hospital_table();
+         
         
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
          setVisible(false);
-        new Login().setVisible(true);
+        new signup().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
          setVisible(false);
-        new Login().setVisible(true);
+        new signup().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
          setVisible(false);
-        new Login().setVisible(true);
+        new signup().setVisible(true);
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -551,7 +576,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
             System.out.println("connection open");
             java.sql.Statement statement = connection.createStatement();
             statement.executeUpdate("insert into hospitalsystem.login" + "(role, username, password)" + "values ('"+role+"','"+username+"', '"+password+"')");
-            JOptionPane.showMessageDialog(null, "User successfully added!");
+           // JOptionPane.showMessageDialog(null, "User successfully added!");
             
         }
         catch(Exception e){
@@ -667,14 +692,14 @@ public class HospitalAdmin extends javax.swing.JFrame {
             java.sql.Statement statement = connection.createStatement();
             String sql = "SELECT * FROM hospitalsystem.hospital";
            // statement.executeUpdate("insert into hospitalsystem.login" + "(role, username, password)" + "values ('"+role+"','"+username+"', '"+password+"')");
-            JOptionPane.showMessageDialog(null, "User successfully added!");
+           // JOptionPane.showMessageDialog(null, "User successfully added!");
             java.sql.ResultSet rs = statement.executeQuery(sql);
             while(rs.next()){
                 String hospitalName = rs.getString("HospitalName");
                 String community = rs.getString("Community");
-                String city = rs.getString("City");
-                String person = rs.getString("Person");
-                String address = rs.getString("Address");
+                String city = rs.getString("Person");
+                String person = rs.getString("Number");
+                String address = rs.getString("Email");
                 
                 String tbData[] = {hospitalName,community,city,person,address};
                 DefaultTableModel tb1Model = (DefaultTableModel)hospitalTable.getModel();
@@ -730,11 +755,10 @@ public class HospitalAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField HospNameTxt;
     private javax.swing.JTextField PnameTxt;
     private javax.swing.JButton addBtn;
-    private javax.swing.JTextArea addressTxt;
-    private javax.swing.JTextField cityTxt;
     private javax.swing.JTextField communityTxt;
     private javax.swing.JButton dAddBtn;
     private javax.swing.JTable doctorTable;
+    private javax.swing.JTextField emailTxt;
     private javax.swing.JTable hospitalTable;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -757,11 +781,11 @@ public class HospitalAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField nameTxt;
+    private javax.swing.JTextField numberTxt;
     private javax.swing.JButton pAddBtn;
     private javax.swing.JTextField pPasswordTxt;
     private javax.swing.JTable pTable;

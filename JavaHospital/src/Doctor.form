@@ -68,10 +68,7 @@
                                       <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="21" max="32767" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" pref="93" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel2" alignment="1" min="-2" pref="93" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -304,13 +301,22 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="pulseRateTxt">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="pulseRateTxtKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="oxyLvlTxt">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="oxyLvlTxtKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="diagnosisTxt">
         </Component>
         <Component class="javax.swing.JButton" name="updateBtn">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
@@ -322,6 +328,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="deleteBtn">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="ff" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
@@ -333,6 +342,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="addBtn">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="ff" red="33" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
@@ -343,6 +355,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="pNameTxt">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="pNameTxtKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="hospTxt">
         </Component>

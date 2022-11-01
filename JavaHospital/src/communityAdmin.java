@@ -59,8 +59,10 @@ public class communityAdmin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Community Details"));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Community Admin");
 
@@ -94,6 +96,7 @@ public class communityAdmin extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(communityTable);
 
+        addBtn.setBackground(new java.awt.Color(102, 255, 51));
         addBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         addBtn.setText("ADD");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +105,7 @@ public class communityAdmin extends javax.swing.JFrame {
             }
         });
 
+        updateBtn.setBackground(new java.awt.Color(255, 255, 51));
         updateBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         updateBtn.setText("UPDATE");
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -110,6 +114,7 @@ public class communityAdmin extends javax.swing.JFrame {
             }
         });
 
+        deleteBtn.setBackground(new java.awt.Color(255, 0, 0));
         deleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         deleteBtn.setText("DELETE");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -231,6 +236,7 @@ public class communityAdmin extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     
@@ -249,6 +255,7 @@ public class communityAdmin extends javax.swing.JFrame {
             java.sql.PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1,house);
             preparedStmt.setString(2,person);
+            
             preparedStmt.setString(3,community);
             preparedStmt.setString(4,city);
             preparedStmt.setString(5,hospital);
@@ -284,12 +291,18 @@ public class communityAdmin extends javax.swing.JFrame {
         String community = communityTxt.getText();
         String city = cityTxt.getText();
         String hospital = hospitalTxt.getText();
+        
+        if(houseTxt.getText().isEmpty()|| communityTxt.getText().isEmpty()||cityTxt.getText().isEmpty()||hospitalTxt.getText().isEmpty()           ){
+                 JOptionPane.showMessageDialog(null, "Plz Enter Details!");
+
+        
+        } else{
 
         
          Community.CreateCommunity(house,person,community,city,hospital);  
+        }
         
-        
-        JOptionPane.showMessageDialog(this,"New Employ details Added");
+        //JOptionPane.showMessageDialog(this,"New Employ details Added");
         
         
         houseTxt.setText("");
@@ -338,7 +351,7 @@ public class communityAdmin extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        new Login().setVisible(true);
+        new signup().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     
