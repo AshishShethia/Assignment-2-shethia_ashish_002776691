@@ -40,6 +40,7 @@ public class help extends javax.swing.JFrame {
         SpecializationTxt = new javax.swing.JTextField();
         DegreeTxt = new javax.swing.JTextField();
         HospNameTxt = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
         PatientVariablePane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -86,6 +87,8 @@ public class help extends javax.swing.JFrame {
         HospNameLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         HospNameLbl.setText("Hospital Name:");
 
+        jLabel8.setText("jLabel8");
+
         javax.swing.GroupLayout personalInfoPaneLayout = new javax.swing.GroupLayout(personalInfoPane);
         personalInfoPane.setLayout(personalInfoPaneLayout);
         personalInfoPaneLayout.setHorizontalGroup(
@@ -111,13 +114,17 @@ public class help extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, personalInfoPaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(DocInfolLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(275, 275, 275))
+                .addGap(208, 208, 208)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
         personalInfoPaneLayout.setVerticalGroup(
             personalInfoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(personalInfoPaneLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(DocInfolLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(personalInfoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(DocInfolLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addGap(27, 27, 27)
                 .addGroup(personalInfoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(IdLbl)
@@ -281,11 +288,11 @@ public class help extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbedpane, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
+            .addComponent(tabbedpane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbedpane, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+            .addComponent(tabbedpane)
         );
 
         pack();
@@ -350,6 +357,7 @@ public class help extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField oxyLvlTxt;
     private javax.swing.JTextField patientIdTxt;

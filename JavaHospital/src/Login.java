@@ -74,6 +74,8 @@ public class Login extends javax.swing.JFrame {
         roleTxt.setBounds(189, 233, 199, 22);
 
         submitBtn.setBackground(new java.awt.Color(102, 255, 102));
+        submitBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        submitBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login.png"))); // NOI18N
         submitBtn.setText("Submit");
         submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,16 +83,16 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(submitBtn);
-        submitBtn.setBounds(190, 300, 72, 23);
+        submitBtn.setBounds(190, 293, 150, 40);
         jPanel1.add(passwordTxt);
         passwordTxt.setBounds(189, 187, 199, 22);
 
         Logintxt.setBackground(new java.awt.Color(255, 0, 0));
-        Logintxt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Logintxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Logintxt.setForeground(new java.awt.Color(255, 51, 51));
         Logintxt.setText("Please Enter Login Details");
         jPanel1.add(Logintxt);
-        Logintxt.setBounds(160, 20, 180, 30);
+        Logintxt.setBounds(130, 30, 260, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,15 +100,15 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(61, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
